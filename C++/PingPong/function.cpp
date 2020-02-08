@@ -7,8 +7,8 @@ void init(Bat& left, Bat& right, Ball& ball){
 	left.y =WINDOWS_SIZE_Y /2;
 	right.y=WINDOWS_SIZE_Y/2;
 	
-	left.size = 3;
-	right.size = 3;
+	left.size = 11;
+	right.size = 11;
 	
 	if (rand()%2){
 		ball.x = left.x+1;
@@ -35,8 +35,21 @@ void drawBall (Ball ball){
 }
 
 void drawBat (Bat bat){
-	for (int i=bat.x;i<bat.x+bat.size;i++){
-		movec(i,bat.y);
+	//od gory	 
+	for (int i=0;i<3;i++){	
+		movec(bat.x,bat.y+bat.size+i);
+		if (bat.y+bat.size+i < WINDOWS_SIZE_Y);
+			cout<<" ";
+		}
+	//od dolu	 
+	for (int i=0;i<3;i++){	
+		movec(bat.x,bat.y-i);
+		if( bat.y-i>0)
+			cout<<" ";
+		}	
+	//rysowanie w³aœciwej paletki	
+	for (int i=bat.y;i<bat.y+bat.size;i++){
+		movec(bat.x,i);
 		cout<<(char)219;
 	}
 }
