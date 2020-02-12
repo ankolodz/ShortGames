@@ -10,15 +10,16 @@ void init(Bat& left, Bat& right, Ball& ball){
 	left.size = 4;
 	right.size = 4;
 	
+	ball.speedY=0;
 	if (rand()%2){
 		ball.x = left.x+1;
 		ball.y = left.y;
-		ball.speedX = 3;
+		ball.speedX = 1;
 	}
 	else{
 		ball.x = right.x-1;
 		ball.y = right.y;
-		ball.speedX = -3;
+		ball.speedX = -1;
 	}
 	HANDLE okno = GetStdHandle(STD_OUTPUT_HANDLE);
     COORD size;
@@ -26,18 +27,7 @@ void init(Bat& left, Bat& right, Ball& ball){
     size.Y = WINDOWS_SIZE_Y;
     SetConsoleScreenBufferSize(okno, size);		
 }
-void setCoursor (short x , short y){
-	HANDLE consolHandle;
-	COORD dest;
-	consolHandle = GetStdHandle(STD_OUTPUT_HANDLE);
-	dest.X = x;
-	dest.Y = y;
-	SetConsoleCursorPosition(consolHandle,dest);
-}
-void setColor (int color){
-	HANDLE consoleHandle=GetStdHandle(STD_OUTPUT_HANDLE);
-	SetConsoleTextAttribute(consoleHandle,color);
-}
+
 
 void drawGameplay (){
 	setColor(7);
@@ -67,9 +57,10 @@ void drawBat (Bat bat){
 	}
 }
 
+
 void draw(Bat left, Bat right, Ball ball){
 	drawGameplay();
-	//drawBall (ball);
+	drawBall (ball);
 	drawBat (left);
 	drawBat (right);
 }

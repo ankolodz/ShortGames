@@ -28,5 +28,7 @@
 	void upBat (Bat& bat);
 	void draw(Bat left, Bat right, Ball ball);
 	void setColor (int color);
+	void ballMovement(Ball& ball,Bat left, Bat right);
+	void drawBall (Ball ball);
 
 #endif

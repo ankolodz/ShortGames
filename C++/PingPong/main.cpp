@@ -6,8 +6,9 @@ main(){
 	init (left,right,ball);
 	draw(left,right,ball);
 	int lastPlayer = 3;
+	
 	while (true){
-		Sleep(10);
+		Sleep(20);
 		lastPlayer--;
 		if (lastPlayer == 2){
 			if (GetAsyncKeyState( 'W' ) & 0x8000)upBat (left);
@@ -20,7 +21,7 @@ main(){
 		else if (lastPlayer == 0)
 			lastPlayer = 3;
 		
-						
+		ballMovement(ball,left,right);				
 		
 	}
 }

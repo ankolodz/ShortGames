@@ -1,6 +1,7 @@
 #include "game.h"
 
 void upBat (Bat& bat){
+	setColor(4);
 	int move = 1;
 	if (bat.y-move <=0)
 		return;
@@ -13,6 +14,7 @@ void upBat (Bat& bat){
 	bat.y -= move;
 }
 void downBat (Bat& bat){
+	setColor(4);
 	int move = 1;
 	if (bat.y+move + bat.size > WINDOWS_SIZE_Y)
 		return;
