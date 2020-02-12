@@ -27,9 +27,6 @@
 	void downBat (Bat& bat);
 	void upBat (Bat& bat);
 	void draw(Bat left, Bat right, Ball ball);
-	void setColor (int color){
-		HANDLE consoleHandle=GetStdHandle(STD_OUTPUT_HANDLE);
-		SetConsoleTextAttribute(consoleHandle,color);
-	}
+	void setColor (int color);
 
 #endif

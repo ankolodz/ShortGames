@@ -34,6 +34,10 @@ void setCoursor (short x , short y){
 	dest.Y = y;
 	SetConsoleCursorPosition(consolHandle,dest);
 }
+void setColor (int color){
+	HANDLE consoleHandle=GetStdHandle(STD_OUTPUT_HANDLE);
+	SetConsoleTextAttribute(consoleHandle,color);
+}
 
 void drawGameplay (){
 	setColor(7);
