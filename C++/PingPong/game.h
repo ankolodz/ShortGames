@@ -1,9 +1,9 @@
 #ifndef GAME
 #define GAME
 
-	#define WINDOWS_SIZE_X 300
-	#define WINDOWS_SIZE_Y 300
-	#define MOVEMENT 3;
+	#define WINDOWS_SIZE_X 60
+	#define WINDOWS_SIZE_Y 20
+	#define MOVEMENT 1;
 	
 	#include<iostream>
 	#include<windows.h>
@@ -23,9 +23,13 @@
 	};
 	
 	void init(Bat& left, Bat& right, Ball& ball);
-	void movec(short x , short y);
-	void drawBall (Ball ball);
-	void drawBat (Bat bat);
+	void setCoursor(short x , short y);
+	void downBat (Bat& bat);
+	void upBat (Bat& bat);
 	void draw(Bat left, Bat right, Ball ball);
+	void setColor (int color){
+		HANDLE consoleHandle=GetStdHandle(STD_OUTPUT_HANDLE);
+		SetConsoleTextAttribute(consoleHandle,color);
+	}
 
 #endif
