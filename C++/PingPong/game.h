@@ -32,5 +32,6 @@
 	void setColor (int color);
 	void ballMovement(Ball& ball,Bat left, Bat right);
 	void drawBall (Ball ball);
+	bool isGameOver(Ball ball);
 
 #endif

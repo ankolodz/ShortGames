@@ -64,5 +64,11 @@ void draw(Bat left, Bat right, Ball ball){
 	drawBat (left);
 	drawBat (right);
 }
+
+bool isGameOver(Ball ball){
+	if (ball.x == 1 || ball.x == WINDOWS_SIZE_X-1)
+		return true;
+	return false;
+}
 	
 

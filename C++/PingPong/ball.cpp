@@ -18,8 +18,17 @@ bool isBatColision (Ball ball,Bat bat){
 	return false;	
 }
 bool isWallColision (Ball ball){
-	if (ball.y == 0 || ball.y == WINDOWS_SIZE_Y)
+	if (ball.y == 1 || ball.y == WINDOWS_SIZE_Y-1)
 		return true;
+	return false;
+}
+int batCrease (Ball ball, Bat bat){
+	if (bat.y == ball.y)
+		return rand()%3;
+	if (bat.y + bat.size -1 == ball.y)
+		return -rand()%3;
+	else
+		return ball.speedY;
 }
 void ballMovement(Ball& ball,Bat left, Bat right){
 	int x=abs(ball.speedX), y = abs(ball.speedY);
@@ -29,12 +38,18 @@ void ballMovement(Ball& ball,Bat left, Bat right){
 		if (x>0){
 			x--;
 			if (isBatColision(ball,left) || isBatColision(ball,right)){
-				//cout<<"colison ";
-				if (ball.speedX < 0)
+				if (ball.speedX < 0){
 					ball.x+=1;
-				else
+					ball.speedY = batCrease (ball,left);
+				}					
+				else{
 					ball.x-=1;
-				ball.speedX = ball.speedX * (-1);
+					ball.speedY = batCrease (ball,right);
+				}
+					
+				ball.speedX = ball.speedX * (-1);				
+				
+				
 				}
 			else if (ball.speedX > 0)
 				ball.x++;
@@ -42,16 +57,17 @@ void ballMovement(Ball& ball,Bat left, Bat right){
 				ball.x--;					
 				
 		}				
-	if(y>0){
-		y--;
-		if (ball.speedY > 0)
-				ball.y++;
-		else if (ball.speedY < 0)
-				ball.y--;
-		if (isWallColision(ball))			
-			ball.speedY *= -1;
-		}
-	drawBall(ball);
+		if(y>0){
+			y--;
+			if (isWallColision(ball))			
+				ball.speedY *= -1;
+			}
+			if (ball.speedY > 0)
+					ball.y++;
+			else if (ball.speedY < 0)
+					ball.y--;
+	
+		drawBall(ball);
 	}
 }
 

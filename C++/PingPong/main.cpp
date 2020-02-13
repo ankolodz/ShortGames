@@ -10,7 +10,7 @@ main(){
 	int lastPlayer = 3;	
 	
 	while (true){
-		Sleep(200);
+		Sleep(30);
 		lastPlayer--;
 		if (lastPlayer == 2){
 			if (GetAsyncKeyState( 'W' ) & 0x8000)upBat (left);
@@ -24,6 +24,10 @@ main(){
 			lastPlayer = 3;
 		
 		ballMovement(ball,left,right);				
-		
+		if (isGameOver(ball))
+			break;
 	}
+	system("cls");
+	cout<<"game over";
+	
 }
