@@ -12,14 +12,14 @@ void init(Bat& left, Bat& right, Ball& ball){
 	
 	ball.speedY=0;
 	if (rand()%2){
-		ball.x = left.x+1;
+		ball.x = left.x+5;
 		ball.y = left.y;
-		ball.speedX = 1;
+		ball.speedX = -1;
 	}
 	else{
-		ball.x = right.x-1;
+		ball.x = right.x-5;
 		ball.y = right.y;
-		ball.speedX = -1;
+		ball.speedX = 1;
 	}
 	HANDLE okno = GetStdHandle(STD_OUTPUT_HANDLE);
     COORD size;

@@ -1,14 +1,16 @@
 #include "game.h"
 
 main(){
+	srand(time(NULL));
+	
 	Bat left,right;
 	Ball ball;
 	init (left,right,ball);
 	draw(left,right,ball);
-	int lastPlayer = 3;
+	int lastPlayer = 3;	
 	
 	while (true){
-		Sleep(20);
+		Sleep(200);
 		lastPlayer--;
 		if (lastPlayer == 2){
 			if (GetAsyncKeyState( 'W' ) & 0x8000)upBat (left);
