@@ -10,22 +10,24 @@ main(){
 	int lastPlayer = 3;	
 	
 	while (true){
-		Sleep(30);
+		Sleep(25);
 		lastPlayer--;
-		if (lastPlayer == 2){
+		//cout<<lastPlayer;
+		if (lastPlayer%2==0){
 			if (GetAsyncKeyState( 'W' ) & 0x8000)upBat (left);
 			if (GetAsyncKeyState( 'S' ) & 0x8000) downBat (left);
 		}
-		else if (lastPlayer==1){
+		else if(lastPlayer%2==1){
 			if (GetAsyncKeyState( VK_UP ) & 0x8000)	upBat (right);
 			if (GetAsyncKeyState( VK_DOWN ) & 0x8000) downBat (right);	
 		}	
-		else if (lastPlayer == 0)
-			lastPlayer = 3;
-		
-		ballMovement(ball,left,right);				
-		if (isGameOver(ball))
-			break;
+		if (lastPlayer == 0){
+			lastPlayer = 6;		
+			ballMovement(ball,left,right);				
+			if (isGameOver(ball))
+				break;
+		}
+
 	}
 	system("cls");
 	cout<<"game over";

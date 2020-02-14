@@ -47,8 +47,9 @@ void ballMovement(Ball& ball,Bat left, Bat right){
 					ball.speedY = batCrease (ball,right);
 				}
 					
-				ball.speedX = ball.speedX * (-1);				
-				
+				ball.speedX = ball.speedX * (-1);
+				if (ball.speedX > 0) ball.speedX++;
+				else ball.speedX--;
 				
 				}
 			else if (ball.speedX > 0)
