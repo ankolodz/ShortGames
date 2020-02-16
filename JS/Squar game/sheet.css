@@ -1,0 +1,60 @@
+.circle{
+    width:5vh;
+    height: 5vh;
+    border-radius: 50%;
+    background-color: blueviolet;
+    position: fixed;
+    top:20%;
+    left:20%;
+}
+.square{
+    width: 7vh;
+    height: 7vh;
+}
+.green{
+    background-color: greenyellow;
+}
+.red{
+    background-color: orangered;
+}
+.top{
+    width: 25%;
+    float:left;
+    background-color: black;
+    color: white;
+    opacity: 0.7;
+}
+.top_alert{
+    width: 25%;
+    float:left;
+    color: white;
+    opacity: 0.7;
+    animation: alertf 1s infinite alternate
+}
+@keyframes alertf{
+    0%{
+        background-color: black;
+    }
+    100%{
+        background-color: red;
+    }
+}
+.master{
+    width:100%;
+    
+
+}
+table{
+    width: 100vh;
+    //background-color: aqua;
+}
+tr{
+    width: 30vh;
+    background-color: aqua;
+}
+#canvas{
+    width:auto;
+    height:90%;
+max-width: 100%;
+    
+}

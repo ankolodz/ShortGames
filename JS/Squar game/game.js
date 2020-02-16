@@ -1,4 +1,5 @@
 var result =0;
+var work =true;
 var name="unknown";
 var time = 10;
 var takt =0;
@@ -7,12 +8,10 @@ var level =1;
 var transform_x=1;
 var transform_y=0;
 var speed=2;
-var top1=[];
 var ball_x=100;
 var ball_y=100;
-var tab = [];
-var length=3;
-var newlength=1;
+var squars = [];
+var numberOfSquars=3;
 //obsługa klawiatury
 document.addEventListener("keydown", keyDownHandler, false);
 
@@ -34,29 +33,85 @@ function keyDownHandler(e) {
         transform_y=speed;
     }
 }
+
+function init(){
+    name=window.prompt("Podaj swój login: "); 
+    speed=window.prompt("Start circle speed: ");
+    numberOfSquars=window.prompt("Square: ")*3;
+
+    for (var i=0;i<numberOfSquars;i=i+3)  newSquar(i);
+
+    work = true;
+    clock();
+    startGame();
+}
+
+function startGame(){
+    if (!work) return;
+    draw();
+    window.requestAnimationFrame(startGame);    
+ }
+
+ function draw (){
+
+    headerUpdate();
+    var canvas = document.getElementById('canvas');
+    var context = canvas.getContext('2d');
+    context.clearRect(0, 0, canvas.width, canvas.height);    
+    
+    for (var i=0;i<squars.length;i=i+3){
+        if (ballColision(i)){
+            console.log("Colision!");
+                result+=squars[i+2];
+                newSquar(i);                
+        }        
+        drawsquar(squars[i],squars[i+1],squars[i+2]);
+    }
+    //increaseSquars();
+    drawBall();
+
+    
+}
+function ballColision(i){
+    return  ball_x>squars[i]-30 && //ball radius 30px + squar 50px
+            ball_x<squars[i]+80 &&
+            ball_y>squars[i+1]-30&& 
+            ball_y<squars[i+1]+80
+}
+
+function newSquar(i){
+    squars[i]=Math.random()*1000;//X position
+    squars[i+1]=Math.random()*1000%680;//Yposition
+    squars[i+2]=20;//points
+}
+
 //rysowanie piłki 
 function drawBall(){
     var canvas = document.getElementById('canvas');
     var context = canvas.getContext('2d');
-    ball_x=ball_x+transform_x;
-    ball_y=ball_y+transform_y;
+    ball_x+=transform_x;
+    ball_y+=transform_y;
+
+    if (ball_x>1270)
+        ball_x=-30;
+    else if (ball_x<-30)
+        ball_x=1270;
+
+    if (ball_y>750)
+        ball_y=-30;
+    else if (ball_y<-30)
+        ball_y=750;
+
     context.beginPath();            
             context.arc(ball_x,ball_y,30,0,360* (Math.PI / 180));
             context.fillStyle = 'black';
             context.fill();
     context.closePath();
-    if (ball_x>1270)
-        ball_x=-30;
-    else if (ball_x<-30)
-        ball_x=1270;
-    if (ball_y>750)
-        ball_y=-30;
-    else if (ball_y<-30)
-        ball_y=750;
+
+
 }
 //rysowanie kwadratu
 function drawsquar (x,y,value){
-    //console.log(value);
     var canvas = document.getElementById('canvas');
     var context = canvas.getContext('2d');
     if (value>0)
@@ -69,142 +124,53 @@ function drawsquar (x,y,value){
     context.fillText(value,x+15,y+20)
 }
 //********************
-function drawScore() {
+function headerUpdate() {
     score=document.getElementById("Score");
     score.textContent=result;
     handle=document.getElementById("Name");
     handle.textContent=name;
     stoper=document.getElementById("Time");
     stoper.textContent=time;
-    
-    //rank=document.getElementById("Top");
-    //rank.textContent=top;
+}
+function clock(){
+    time--;
+    if(time==5){
+        var pageElement = document.getElementsByClassName("top");
+        for(var j=0; j<pageElement.length; j++)
+            pageElement[j].className = "top_alert";
+    }
+    if (time==59){
+        var pageElements2 = document.getElementsByClassName("top_alert");
+        for(var j=0; j<pageElements2.length; j++)
+            pageElements2[j].className = "top"; 
+    }
 
-}
-function finish(){
-    for (var i=0;i<6;i=i+2){
-        if(top[i]<result){
-            top1[i]=name;
-            top1[i+1]=result;
+    if (time > 0){
+        for (var i=2;i<squars.length;i=i+3){
+            if(squars[i]<(-20)) 
+                newSquar(i-2);
+            else 
+                squars[i]--;
         }
     }
-    
-    
-}
-function zegar(l){
-    takt=takt+1;
-    licz=licz+level;
-    if(licz>=60){
-        for (var i=2;i<l;i=i+3){
-            if(tab[i]<(-20)){
-                tab[i-2]=Math.random()*1000;
-                tab[i-1]=Math.random()*1000%640;
-                tab[i]=20;
-            }
-            else
-                tab[i]=tab[i]-1;
-        }
-        licz=0;
-    }
-    if(takt>=60){
-        for (var i=2;i<l;i=i+3){
-            if(tab[i]<(-20)){
-                tab[i-2]=Math.random()*1000;
-                tab[i-1]=Math.random()*1000%640;
-                tab[i]=20;
-            }
-            else
-                tab[i]=tab[i]-1;
-        }
-        time--;
-        takt=0;
-    }
-    if (time==0){
-        level=level+1;
-        newlength=l*2;
-        speed=speed*level;
-        time=60;
+    else{
+        level++;
         if (level==4){
-            finish();
+            work = false;
             window.alert("Finish your point: "+result);
             level=0;
             speed=1;
-            first();
+            startGame();
+            return;
         }
-    }
-    if(time==5){
-        var pageElement = document.getElementsByClassName("top");
-        var length = pageElement.length;
-        for(var i=0; i<length; i++){
-            pageElement[0].className = "top_alert"
-    }
-    }
-    if (time==60){
-        var pageElements2 = document.getElementsByClassName("top_alert")
-        var lengt2 = pageElements2.length
-        for(var i=0; i<lengt2; i++){
-            pageElements2[0].className = "top";
-        
-    }
-        
-    }
+        numberOfSquars*=2;
+        for(var i=squars.length;i<numberOfSquars;i=i+3)
+            newSquar(i);
+        time=60;
+        speed*=level;
+    }    
     
-}
-function first(){
-    name=window.prompt("Podaj swój login: "); 
-    speed=window.prompt("Start circle speed: ");
-    length=window.prompt("Square: ")*3;
-    newlength=length;
-    newresult=document.getElementById("tops");
-    //tmp=top.toString;
-    //var top =["web",999,"master",888,"else",887];
-    //console.log(top);
-    newresult.textContent=top;
-    for (var i=0;i<length;i=i+3){
-        tab[i]=Math.random()*1000;
-        tab[i+1]=Math.random()*1000%680;
-        tab[i+2]=20;
-        //console.log(tab[i]+"y: "+tab[i+1]);
-    }
-}
-function more(){
-    
-    if(newlength!=length){
-        //console.log(newlength);
-        for(var i=length;i<newlength;i=i+3){
-            tab[i]=Math.random()*1000;
-            tab[i+1]=Math.random()*1000%680;
-            tab[i+2]=20;
-        }
-        
-    }
-    length=newlength;
+    setTimeout(clock,1000/level);
 }
 
-function draw (){
-    
-    var canvas = document.getElementById('canvas');
-    var context = canvas.getContext('2d');
-    context.clearRect(0, 0, canvas.width, canvas.height);
-    drawScore();
-    //console.log(length);
-    for (var i=0;i<length;i=i+3){
-        if (ball_x>tab[i]-30&&ball_x<tab[i]+80&&ball_y>tab[i+1]-30&&ball_y<tab[i+1]+80){
-            result+=tab[i+2];
-            tab[i]=Math.random()*1000;
-            tab[i+1]=Math.random()*1000%680;
-            tab[i+2]=20;
-        }
-        drawsquar(tab[i],tab[i+1],tab[i+2]);
-    }
-    zegar(length);
-    more();
-    drawBall();
 
-    
-}
-function init(){
-   draw();
-   window.requestAnimationFrame(init);
-    
-}
