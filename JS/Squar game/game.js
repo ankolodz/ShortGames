@@ -16,21 +16,22 @@ var numberOfSquars=3;
 document.addEventListener("keydown", keyDownHandler, false);
 
 function keyDownHandler(e) {
+    console.log("Key hit!");
     if(e.key == "Right" || e.key == "ArrowRight") {
-        transform_x=speed;
+        transform_x=parseInt(speed);
         transform_y=0;
     }
     else if(e.key == "Left" || e.key == "ArrowLeft") {
-        transform_x=-speed;
+        transform_x=parseInt(-speed);
         transform_y=0;
     }
     else if(e.key == "Up" || e.key == "ArrowUp") {
         transform_x=0;
-        transform_y=-speed;
+        transform_y=parseInt(-speed);
     }
     else if(e.key == "Down" || e.key == "ArrowDown") {
         transform_x=0;
-        transform_y=speed;
+        transform_y=parseInt(speed);
     }
 }
 
@@ -65,9 +66,8 @@ function startGame(){
                 result+=squars[i+2];
                 newSquar(i);                
         }        
-        drawsquar(squars[i],squars[i+1],squars[i+2]);
+        drawSquar(squars[i],squars[i+1],squars[i+2]);
     }
-    //increaseSquars();
     drawBall();
 
     
@@ -91,7 +91,7 @@ function drawBall(){
     var context = canvas.getContext('2d');
     ball_x+=transform_x;
     ball_y+=transform_y;
-
+    console.log(ball_x + " "+ball_y);
     if (ball_x>1270)
         ball_x=-30;
     else if (ball_x<-30)
@@ -111,7 +111,7 @@ function drawBall(){
 
 }
 //rysowanie kwadratu
-function drawsquar (x,y,value){
+function drawSquar (x,y,value){
     var canvas = document.getElementById('canvas');
     var context = canvas.getContext('2d');
     if (value>0)
