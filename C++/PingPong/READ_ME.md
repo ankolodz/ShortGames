@@ -16,3 +16,6 @@ ball could get speed in vertical.
 * ctime
 * cstdlib
 * windows.h
+##Instalation
+Use makefile. The game work only windows. You must use encoding ASCII in terminal.
+
