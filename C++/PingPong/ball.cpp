@@ -62,12 +62,12 @@ void ballMovement(Ball& ball,Bat left, Bat right){
 			y--;
 			if (isWallColision(ball))			
 				ball.speedY *= -1;
-			}
+			
 			if (ball.speedY > 0)
 					ball.y++;
 			else if (ball.speedY < 0)
 					ball.y--;
-	
+		}
 		drawBall(ball);
 	}
 }

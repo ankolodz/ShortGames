@@ -66,7 +66,7 @@ void draw(Bat left, Bat right, Ball ball){
 }
 
 bool isGameOver(Ball ball){
-	if (ball.x == 1 || ball.x == WINDOWS_SIZE_X-1)
+	if (ball.x <= 1 || ball.x >= WINDOWS_SIZE_X-1)
 		return true;
 	return false;
 }
