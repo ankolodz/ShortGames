@@ -11,11 +11,11 @@ ball could get speed in vertical.
 ### Player2 
 * UP - turn up bat 
 * DOWN - turn down bat
-## Used librarys
+## Used libraries
 * iostream
 * ctime
 * cstdlib
 * windows.h
-##Instalation
+## Instalation
 Use makefile. The game work only windows. You must use encoding ASCII in terminal.
 
