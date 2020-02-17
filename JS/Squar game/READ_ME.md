@@ -12,3 +12,7 @@ the ball's speed is growing, time run faster and the squars value less faster.
 * DOWN - ball direction  was change to down
 * LEFT - ball direction  was change to left
 * RIGHT - ball direction  was change to right
+## How start game
+* Firstly you must write yours login
+* Secondly you must set ball speed 1-10, recomendly 3
+* Thirdly  you must set numbers of squars, recomendly 20
