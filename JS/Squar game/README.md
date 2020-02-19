@@ -1,7 +1,7 @@
-# Squar game
+# Square game
 ![](./main.png)
 ## Describe
-* You move the ball and try to hitsquares. Each squars has his points - value. 
+* You move the ball and try to hitsquares. Each squares has his points - value. 
 Time is running out and the square value decreases, if the square value is less than -20, 
 the square will be removed and a new square will be created.
 
@@ -14,5 +14,5 @@ the ball's speed is growing, time run faster and the squars value less faster.
 * RIGHT - ball direction  was change to right
 ## How start game
 * Firstly you must write yours login
-* Secondly you must set ball speed 1-10, recomendly 3
-* Thirdly  you must set numbers of squars, recomendly 20
+* Secondly you must set ball speed 1-10, recommended 3
+* Thirdly  you must set numbers of squares, recommended 20
