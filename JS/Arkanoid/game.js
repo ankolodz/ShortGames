@@ -3,7 +3,7 @@ document.addEventListener("keydown", keyDownHandler, false);
 var isPlay = false;
 var actuallBatPosition = 300;
 var batSpeed = 30, batWidth = 100, batBorder = 10;
-var ballRadius = 20;
+var ballRadius = 20, ballSpeedX = 0, ballSpeedY = 0;
 var ball_x = actuallBatPosition + batWidth/2, ball_y;
 
 var canvas, context;
@@ -20,8 +20,9 @@ function mouseHendler(e){
 function keyDownHandler(e){
     //console.log(e.key);
     if (!isPlay && e.key == " "){
-        ballSpeedX = 2;
-        isPlay == true;
+        console.log("pressed");
+        ballSpeedY = -2;
+        isPlay = true;
     }
 }
 function init (){
