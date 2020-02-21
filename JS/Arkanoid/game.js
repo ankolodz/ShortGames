@@ -37,6 +37,11 @@ function loop (){
     transformBall();
 
     draw();
+    if (isGameOver()){
+        alert("GAME OVER");
+        return;
+    }
+       
     setTimeout(loop,1000/FPS);
 }
 function draw(){
@@ -84,9 +89,11 @@ function topWallColider(){
     return ball_y - ballRadius == 10;//top  frame 10px
 }
 function batColider(){
-    //console.log((ball_y + ballRadius) + " " + (document.documentElement.clientHeight - 15))
-    if (ball_y + 2*ballRadius == document.documentElement.clientHeight - 15)//bottom 5px + batHeight 10px
+    if (ball_y + 2*ballRadius > document.documentElement.clientHeight - 15)//bottom 5px + batHeight 10px
         if (ball_x >= actuallBatPosition && ball_x <= actuallBatPosition + batWidth )
             return true;
     return false;
+}
+function isGameOver(){
+    return ball_y > document.documentElement.clientHeight;
 }
