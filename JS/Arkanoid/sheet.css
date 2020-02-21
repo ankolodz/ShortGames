@@ -1,0 +1,30 @@
+#bat{
+    display: inline-block;
+    position: fixed; bottom: 5px;
+    background-color: brown;
+    height: 10px;
+    width: 200px;
+}
+#ball{
+    display: inline-block;
+    position: fixed;
+    border: solid;
+    border-radius: 100%;
+    width: 20px;
+    height: 20px;
+    background-color: maroon;
+}
+#scene{
+    background-image: url("background.jpg");
+    border: solid;
+    border-width: 5px;
+    border-color: darkblue;
+    position: fixed;
+    left: 5px; top: 5px; right:5px;
+    height: 99%;
+    border-radius: 5px;
+}
+body{
+    background-color: black;
+    height: 100%;
+}

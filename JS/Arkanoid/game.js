@@ -1,44 +1,46 @@
 document.addEventListener("mousemove",mouseHendler,false);
 document.addEventListener("keydown", keyDownHandler, false);
-var isPlay = false;
-var actuallBatPosition = 300;
-var batSpeed = 30, batWidth = 100, batBorder = 10;
+var isPlay = false, FPS = 30;
+var actuallBatPosition = 300, bat;
+var batSpeed = 30, batWidth = 100, batBorder = 20;
 var ballRadius = 20, ballSpeedX = 0, ballSpeedY = 0;
-var ball_x = actuallBatPosition + batWidth/2, ball_y;
+var ball,ball_x = actuallBatPosition + batWidth/2, ball_y;
 
-var canvas, context;
+
 
 function mouseHendler(e){
     actuallBatPosition = e.clientX;
 
-    if(actuallBatPosition>canvas.width - batWidth)
-        actuallBatPosition = canvas.width - batWidth;
+    if(actuallBatPosition> document.documentElement.clientWidth - batWidth -10)
+        actuallBatPosition = document.documentElement.clientWidth - batWidth -10;
     
-    if (actuallBatPosition < 0)
-        actuallBatPosition = 0;
+    if (actuallBatPosition < 10)
+        actuallBatPosition = 10;
 }
 function keyDownHandler(e){
     //console.log(e.key);
     if (!isPlay && e.key == " "){
         console.log("pressed");
-        ballSpeedY = -2;
+        ballSpeedY = -4;
         isPlay = true;
     }
 }
 function init (){
-    canvas = document.getElementById('canvas');
-    context = canvas.getContext('2d');
-    ball_y = canvas.height - batBorder - ballRadius;
+    bat = document.getElementById("bat");
+    ball = document.getElementById("ball");
+    ball_y = document.documentElement.clientHeight - batBorder - 2 * ballRadius;
+    console.log(ball_y);
     loop();
 }
 function loop (){
+
     transformBall();
+
     draw();
-    window.requestAnimationFrame(loop);
+    setTimeout(loop,1000/FPS);
 }
 function draw(){
-    
-    context.clearRect(0, 0, canvas.width, canvas.height); 
+
     drawBat();
     drawBall();
 }
@@ -47,18 +49,44 @@ function transformBall (){
         ball_x = actuallBatPosition + batWidth/2;
         return;
     }
-    ball_x += ballSpeedX;
-    ball_y += ballSpeedY;
+    for (i=Math.abs(ballSpeedX);i>0;i--){
+        if (sideWallColider)
+            ballSpeedX *= -1;
+        if (ballSpeedX > 0)
+            ball_x++;
+        else    
+            ball_x--;
+    }
+    for (i=Math.abs(ballSpeedY);i>0;i--){
+        if (topWallColider() || batColider())
+            ballSpeedY *= -1;
+        if (ballSpeedY > 0)
+            ball_y++;
+        else    
+            ball_y--;
+    }
 }
 function drawBat(){
-    context.fillStyle = 'chartreuse';
-    let x = actuallBatPosition;
-    context.fillRect(x,canvas.height-batBorder,batWidth,batBorder);
+    bat.style.left = actuallBatPosition;
+    bat.style.width = batWidth;
 }
 function drawBall(){
-    context.beginPath();            
-        context.arc(ball_x,ball_y,ballRadius,0,360* (Math.PI / 180));
-        context.fillStyle = 'black';
-        context.fill();
-    context.closePath();
+    ball.style.left = ball_x;
+    ball.style.top = ball_y;
+}
+//colaiders
+
+function sideWallColider(){
+    return ball_x - ballRadius == 10 || 
+    ball_x + ballRadius == document.documentElement.clientWidth - 10;
+}
+function topWallColider(){
+    return ball_y - ballRadius == 10;//top  frame 10px
+}
+function batColider(){
+    //console.log((ball_y + ballRadius) + " " + (document.documentElement.clientHeight - 15))
+    if (ball_y + 2*ballRadius == document.documentElement.clientHeight - 15)//bottom 5px + batHeight 10px
+        if (ball_x >= actuallBatPosition && ball_x <= actuallBatPosition + batWidth )
+            return true;
+    return false;
 }
