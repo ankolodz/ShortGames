@@ -54,22 +54,14 @@ function transformBall (){
         ball_x = actuallBatPosition + batWidth/2;
         return;
     }
-    for (i=Math.abs(ballSpeedX);i>0;i--){
-        if (sideWallColider)
+        if (sideWallColider()){
             ballSpeedX *= -1;
-        if (ballSpeedX > 0)
-            ball_x++;
-        else    
-            ball_x--;
-    }
-    for (i=Math.abs(ballSpeedY);i>0;i--){
+        }            
+        ball_x += ballSpeedX;
+
         if (topWallColider() || batColider())
             ballSpeedY *= -1;
-        if (ballSpeedY > 0)
-            ball_y++;
-        else    
-            ball_y--;
-    }
+        ball_y += ballSpeedY
 }
 function drawBat(){
     bat.style.left = actuallBatPosition;
@@ -82,17 +74,29 @@ function drawBall(){
 //colaiders
 
 function sideWallColider(){
-    return ball_x - ballRadius == 10 || 
-    ball_x + ballRadius == document.documentElement.clientWidth - 10;
+    console.log (ball_x  == 10 + " "+ 
+        ball_x + 2*ballRadius == document.documentElement.clientWidth - 10)
+    return ball_x  <= 10 || 
+           ball_x + 2*ballRadius >= document.documentElement.clientWidth - 10;
 }
 function topWallColider(){
-    return ball_y - ballRadius == 10;//top  frame 10px
+    return ball_y - ballRadius <= 10;//top  frame 10px
 }
 function batColider(){
     if (ball_y + 2*ballRadius > document.documentElement.clientHeight - 15)//bottom 5px + batHeight 10px
-        if (ball_x >= actuallBatPosition && ball_x <= actuallBatPosition + batWidth )
+        if (ball_x + 2 * ballRadius >= actuallBatPosition && ball_x  <= actuallBatPosition + batWidth ){
+            setCornerBatRotation();
             return true;
+        }
+            
     return false;
+}
+function setCornerBatRotation(){
+    if (ball_x < actuallBatPosition)
+        ballSpeedX = - Math.floor(Math.random()*10)%5;
+    
+    if (ball_x - 2*ballRadius > actuallBatPosition + batWidth)
+        ballSpeedX =  Math.floor(Math.random()*10)%5;
 }
 function isGameOver(){
     return ball_y > document.documentElement.clientHeight;
