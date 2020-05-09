@@ -14,6 +14,15 @@ function start(){
     }
     display(x,y);
     console.log(board);
+
+    for(i=0;i<mines;i++){
+        k = Math.floor(Math.random()*100%x);
+        l = Math.floor(Math.random()*100%y)
+        if (board[k][l] != 1)
+            board[k][l] = 1;
+        else
+            i--;
+    }
 }
 
 function display(x,y){
