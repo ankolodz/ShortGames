@@ -12,5 +12,24 @@ function start(){
             tmp.push(0)
         board[i] = tmp;
     }
+    display(x,y);
     console.log(board);
+}
+
+function display(x,y){
+    htmlText = "";
+    for (i=0;i<x;i++){
+        htmlText += '<div class="row">';
+        for(j=0;j<y;j++){
+            htmlText += '<div class="singleBox" id="x'+i+'y'+j+'" onClick="select('+i+','+j+')">.</div> ';
+        }
+        htmlText+='</div>';
+    }
+    document.getElementById("game").innerHTML = htmlText;
+}
+function select(x,y){
+
+    document.getElementById("x"+x+"y"+y).innerHTML = board[x][y];
+    document.getElementById("x"+x+"y"+y).classList += " colorT";
+
 }
