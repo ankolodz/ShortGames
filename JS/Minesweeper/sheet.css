@@ -1,0 +1,22 @@
+#menu{
+    position: fixed;
+    left: 0px; top: 0px;
+    float: left;
+    width: 100%;
+    background: dimgrey;
+    box-shadow: 1px 2px 5px black;
+}
+input{
+    float: left;
+    margin : 20px;
+    padding: 10px;
+}
+h1{
+    float: left;
+    margin : 10px;
+    padding: 10px;
+}
+button{
+    margin : 20px;
+    padding: 10px;
+}
