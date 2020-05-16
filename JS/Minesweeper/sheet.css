@@ -36,11 +36,43 @@ button{
     box-shadow: 1px 1px 2px black;
 
     font-size: 20px;
+    font-weight: 600;
     color: lightgray;
 }
-.colorT{
+img{
+    width:20px;
+    height: 18px;
+}
+.noBomb{
     color:black;
 }
+.one{
+    color: cornflowerblue;
+}
+.two{
+    color: greenyellow;
+}
+.three{
+    color: crimson;
+}
+@keyframes hot{
+    0%{
+        color: maroon;
+    }
+    50%{
+        color: magenta;
+    }
+    100%{
+        color: red;
+    }
+}
+.more{
+    color: maroon;
+    animation-name: hot;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
+}
+
 
 .singleBox:hover{
     background-color: dimgray;

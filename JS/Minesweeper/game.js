@@ -19,10 +19,35 @@ function start(){
         k = Math.floor(Math.random()*100%x);
         l = Math.floor(Math.random()*100%y)
         if (board[k][l] != 1)
-            board[k][l] = 1;
+            board[k][l] = -1;
         else
             i--;
     }
+    for(i=0;i<x;i++)
+        for(j=0;j<y;j++){
+            sum = 0;
+            if(board[i][j] == -1)
+                continue;
+            if(i-1 >= 0 && j-1 >= 0 && board[i-1][j-1] == -1)
+                sum++;
+            if(i-1 >= 0  && board[i-1][j] == -1)
+                sum++;
+            if(i-1 >= 0 && j+1 < y && board[i-1][j+1] == -1)
+                sum++;
+            if(j-1 >= 0 && board[i][j-1] == -1)
+                sum++;
+            if(j+1 < y && board[i][j+1] == -1)
+                sum++;
+            if(i+1 < x && j-1 >= 0 && board[i+1][j-1] == -1)
+                sum++;
+            if(i+1 < x &&  board[i+1][j] == -1)
+                sum++;
+            if(i+1 < x && j+1 < y && board[i+1][j+1] == -1)
+                sum++;
+            
+            board[i][j] = sum;
+
+        }
 }
 
 function display(x,y){
@@ -37,8 +62,29 @@ function display(x,y){
     document.getElementById("game").innerHTML = htmlText;
 }
 function select(x,y){
+    color = " noBomb";
+    switch(board[x][y]){
+        case 1:
+            color = " one";
+            break;
+        case 2:
+            color = " two";
+            break;
+        case 3:
+            color = " three";
+            break;
 
-    document.getElementById("x"+x+"y"+y).innerHTML = board[x][y];
-    document.getElementById("x"+x+"y"+y).classList += " colorT";
+        default:
+            if(board[x][y] == -1)
+                color = " noBomb";
+            else if (board[x][y] >= 4)
+                color = " more";
+    }
+    obj = document.getElementById("x"+x+"y"+y)
+    if (board[x][y] != -1)
+        obj.innerHTML = board[x][y];
+    else
+        obj.innerHTML = '<img src="bomb.png">'
+    obj.classList +=  color;
 
 }
