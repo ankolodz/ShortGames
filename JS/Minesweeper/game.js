@@ -83,8 +83,11 @@ function select(x,y){
     obj = document.getElementById("x"+x+"y"+y)
     if (board[x][y] != -1)
         obj.innerHTML = board[x][y];
-    else
-        obj.innerHTML = '<img src="bomb.png">'
+    else{
+        obj.innerHTML = '<img src="bomb.png">';
+        alert("GAME OVER!");
+    }
+        
     obj.classList +=  color;
 
 }
